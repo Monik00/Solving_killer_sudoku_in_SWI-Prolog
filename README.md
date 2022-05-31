@@ -22,3 +22,5 @@ https://killersudoku.com/pages/how-to-play-killer-sudoku,
 but with little changes can be solved any killer sudoku. 
 
 ![image](https://user-images.githubusercontent.com/106586406/171146099-79a4a0e9-326a-4a56-9617-847bbb1230eb.png)
+
+Here we are explaining how we create the code: 
