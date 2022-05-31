@@ -24,4 +24,4 @@ but with little changes can be solved any killer sudoku.
 ![image](https://user-images.githubusercontent.com/106586406/171146099-79a4a0e9-326a-4a56-9617-847bbb1230eb.png)
 
 Here we are explaining how we create the code: 
-explenation_code.md
+https://github.com/Monik00/Solving_killer_sudoku_in_SWI-Prolog/blob/e6642b7ccff407bbab159bb50c15d924ec769706/explenation_code.md
