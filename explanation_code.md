@@ -3,7 +3,7 @@
 In this file we will explain how our code is working.
 
 
-##### :- use_module(library(clpfd)).
+' :- use_module(library(clpfd)). '
 At first we are importing the "CLPFD"-Library by using the function "use_module". CLPFD means Constraint Logic Programming over Finite Domains. With this library we make integer constraints available in our program. This is advisable because almost all Prolog programs also reason about integers in one way or another. For example we can use it for our additions in the Killer Sudoku. For defining the rules we can write  "5 #= E11 + E12", so that Prolog calculates Field11 + Field12 has to be 5.
 
 
