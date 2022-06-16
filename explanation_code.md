@@ -32,10 +32,11 @@ This line is labeling each row in the matrix with a specific name. This is neede
 ##### blocks(L4,L5,L6),
 ##### blocks(L7,L8,L9),
 
-here we are using our block function to define our block. This is a new function, which we will explain right now:
+This is a new function called **blocks**. This function will be explained in the following lines:
 
-At first we have to define the empty solution: 
 ##### blocks([], [], []).
+This line just defined the empty solution for blocks.
+Mathematical Induction??
 ##### blocks([E1,E2,E3|Tail1],
 ##### 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   [E4,E5,E6|Tail2],
 ##### 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   [E7,E8,E9|Tail3]):-
