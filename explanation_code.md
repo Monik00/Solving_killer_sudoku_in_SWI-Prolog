@@ -7,41 +7,41 @@ In this file we will explain how our code is working.
 At first we are importing the "CLPFD"-Library by using the function "use_module". CLPFD means Constraint Logic Programming over Finite Domains. With this library we make integer constraints available in our program. This is advisable because almost all Prolog programs also reason about integers in one way or another. For example we can use it for our additions in the Killer Sudoku. For defining the rules we can write  "5 #= E11 + E12", so that Prolog calculates Field11 + Field12 has to be 5.
 
 
-## sudoku(Matrix) :- length(Matrix, 9),
+##### sudoku(Matrix) :- length(Matrix, 9),
 The name of our main function is "sudoku". The name of our result / our instance "Matrix". The function "length" with input "Matrix, 9" will make an empty list with the length 9 ( [_,_,_,_,_,_,_,_,_] ). 
 
-## maplist(same_length(Matrix), Matrix),
+##### maplist(same_length(Matrix), Matrix),
 The function maplist takes a function and a list and applies the function to each item in the list. At this point we could also use "maplist(length, Matrix, [9,9,9,9,9,9,9,9,9])." -> The length of every position in the list would be 9, so maplist would add 9 empty positions to every position in the list. ([_,_,_,_,_,_,_,_,_],[_,_,_,_,_,_,_,_,_],... ).  With the function "same_length" we do exactly the same because the length of matrix is 9 (we defined this before). 
 
-## append(Matrix, Vars), Vars ins 1..9,
+##### append(Matrix, Vars), Vars ins 1..9,
 With the append function we append the rule that in every position only numbers between 1 and 9 are allowed in the Matrix. 
 
-## maplist(all_distinct, Matrix),
+##### maplist(all_distinct, Matrix),
 The function "all_distinct" means that in every row every position has to get a different number. 
 
-## transpose(Matrix, TransMatrix),
+##### transpose(Matrix, TransMatrix),
 Here we are transposing the Matrix. On this way we want to get our columns instead of our rows.
 
-## maplist(all_distinct, TransMatrix),
+##### maplist(all_distinct, TransMatrix),
 Here we define the rule that in every column every position has to get a different number.
 
-## Matrix = [L1,L2,L3,L4,L5,L6,L7,L8,L9],
+##### Matrix = [L1,L2,L3,L4,L5,L6,L7,L8,L9],
 Here we are labeling each line/row in our Matrix with a specific name. We need this for defining our 9 blocks.
 
-## blocks(L1,L2,L3),
-## blocks(L4,L5,L6),
-## blocks(L7,L8,L9),
+##### blocks(L1,L2,L3),
+##### blocks(L4,L5,L6),
+##### blocks(L7,L8,L9),
 
 here we are using our block function to define our block. This is a new function, which we will explain right now:
 
 At first we have to define the empty solution: 
-## blocks([], [], []).
+##### blocks([], [], []).
 
-## blocks([E1,E2,E3|Tail1],
-## 	   [E4,E5,E6|Tail2],
-## 	   [E7,E8,E9|Tail3]):-
-## 	   all_distinct([E1,E2,E3,E4,E5,E6,E7,E8,E9]),
-## 	   blocks(Tail1, Tail2, Tail3).
+##### blocks([E1,E2,E3|Tail1],
+##### 	   [E4,E5,E6|Tail2],
+##### 	   [E7,E8,E9|Tail3]):-
+##### 	   all_distinct([E1,E2,E3,E4,E5,E6,E7,E8,E9]),
+##### 	   blocks(Tail1, Tail2, Tail3).
 The first line means that we take the first three elements of our first input (e.g. L1). The rest of L1 is in Tail1. In the second line the same happens for the second input (e.g. L2) and in the third line for the third input (e.g. L3). So our first block would be the first three elements of the first three rows. With "all_distinct" we define that all these elements won't have the same number. The last line "blocks(Tail1, Tail2, Tail3)." means that we will repeat this clause with every tail. So in the second round E1 would be the forth element of L1 and so on. 
 
 In total we have to call the blocks-function three times (first time: L1,L2,L3; second time: L4,L5,L6; third time: L7,L8,L9) so that we get our 9 blocks.
@@ -102,7 +102,7 @@ With this code we defined each position/element in our Matrix. We have to do it 
      
 In SWI-Prolog we can ask for the solution of our sudoku with the following input:
 
-## sudoku(Matrix),write(Matrix).
+##### sudoku(Matrix),write(Matrix).
 
 In this case we don't get a concret result. If we want to get concret numbers, we have to add a labeling:
 
