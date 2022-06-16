@@ -3,30 +3,30 @@
 In this file we will explain how our code is working.
 
 
-' :- use_module(library(clpfd)). '
-At first we are importing the "CLPFD"-Library by using the function "use_module". CLPFD means Constraint Logic Programming over Finite Domains. With this library we make integer constraints available in our program. This is advisable because almost all Prolog programs also reason about integers in one way or another. For example we can use it for our additions in the Killer Sudoku. For defining the rules we can write  "5 #= E11 + E12", so that Prolog calculates Field11 + Field12 has to be 5.
+#### :- use_module(library(clpfd)). 
+At first we are importing the "CLPFD"-Library by using the function **use_module**. CLPFD means Constraint Logic Programming over Finite Domains. With this library we make integer constraints available in our program. This is advisable because almost all Prolog programs also reason about integers in one way or another. For example we can use it for our additions in the Killer Sudoku. For defining the rules we can write  **5 #= E11 + E12**, so that Prolog calculates that Element11 and Element12 has to be 5.
 
 
 ##### sudoku(Matrix) :- length(Matrix, 9),
-The name of our main function is "sudoku". The name of our result / our instance "Matrix". The function "length" with input "Matrix, 9" will make an empty list with the length 9 ( [_,_,_,_,_,_,_,_,_] ). 
+On the left side of the '**:-**' we are defining our "main function". The name of our main function is **sudoku**. The name of our input is **Matrix**. On the right side we have our first function named **length** with input **(Matrix, 9)**. This will make an empty list with the length 9 (`[_,_,_,_,_,_,_,_,_]`) and the name **Matrix**. The symbol '**:-**', sometimes called a turnstile, can be pronounced "if''. So this whole line can be written as "Matrix is a sudoku if Matrix is a list with length 9". This is only the first rule which is determined. In the following lines there will be more rules to define the sudoku. The '**,**' at the end means that more rules will follow. For finishing the function a '**.**' has to be used in Prolog.
 
 ##### maplist(same_length(Matrix), Matrix),
-The function maplist takes a function and a list and applies the function to each item in the list. At this point we could also use "maplist(length, Matrix, [9,9,9,9,9,9,9,9,9])." -> The length of every position in the list would be 9, so maplist would add 9 empty positions to every position in the list. ([_,_,_,_,_,_,_,_,_],[_,_,_,_,_,_,_,_,_],... ).  With the function "same_length" we do exactly the same because the length of matrix is 9 (we defined this before). 
+This is the second rule for the sudoku. The function maplist takes a function and a list and applies the function to each item in the list. At this point we could also use `maplist(length, Matrix, [9,9,9,9,9,9,9,9,9])`." -> The length of every element in the list would be 9, so maplist would add 9 empty positions to every element in the list. (`[_,_,_,_,_,_,_,_,_],[_,_,_,_,_,_,_,_,_],...` ). So the result is a list of lists or, with other words, a 9x9 matrix.  Using the function **same_length** is a different way to do exactly the same because the length of our list named **Matrix** is 9 (we defined this before). 
 
 ##### append(Matrix, Vars), Vars ins 1..9,
-With the append function we append the rule that in every position only numbers between 1 and 9 are allowed in the Matrix. 
+The function **append** defines a rule that in every position only numbers between 1 and 9 are allowed in the matrix. 
 
 ##### maplist(all_distinct, Matrix),
-The function "all_distinct" means that in every row every position has to get a different number. 
+The function **all_distinct** defines that in every row every position has to get a different number. 
 
 ##### transpose(Matrix, TransMatrix),
-Here we are transposing the Matrix. On this way we want to get our columns instead of our rows.
+The function **transpose** transposes the matrix. For example if the matrix would be `[1,2,3; 4,5,6; 7,8,9]` after transposing it would be `[1,4,7;2,5,8;3,6,9]`. This is useful for defining the **all_distinct**-rule for the columns as well.
 
 ##### maplist(all_distinct, TransMatrix),
-Here we define the rule that in every column every position has to get a different number.
+This function defines the rule that in every column every position has to get a different number.
 
 ##### Matrix = [L1,L2,L3,L4,L5,L6,L7,L8,L9],
-Here we are labeling each line/row in our Matrix with a specific name. We need this for defining our 9 blocks.
+This line is labeling each row in the matrix with a specific name. This is needed for defining the 9 blocks.
 
 ##### blocks(L1,L2,L3),
 ##### blocks(L4,L5,L6),
