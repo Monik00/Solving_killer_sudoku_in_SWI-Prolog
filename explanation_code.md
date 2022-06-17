@@ -104,7 +104,11 @@ To get the solution, the code file has to be consulted in SWI-Prolog. After that
 ##### sudoku(Matrix).
 
 In this case Prolog probably won't deliver a concret solution. Instead the result will look similar to this: 
+<br />
+<br />
 ![image](https://user-images.githubusercontent.com/101565106/174283853-e477d2cd-386f-4d3e-8d92-31d750f2770a.png)
+<br />
+<br />
 That happens because the domains of some variables are still infinite. For getting a concret solution, the **labeling**-function can be used.  **Labeling** assigns a value to each variable in *Vars*. For more informations about labeling, here is a link: https://www.swi-prolog.org/pldoc/man?predicate=labeling%2f2 
 
 For the killer sudoku, for example **First-Fail-Labeling** can be used as a labeling strategy. This means that the leftmost variable with smallest domain will be labeled next. Also a **write(Matrix)** can be added, so that Prolog will show all results without shorting them:
@@ -113,13 +117,19 @@ For the killer sudoku, for example **First-Fail-Labeling** can be used as a labe
 
 The result will look like the following picture: 
 
+<br />
+<br />
 ![image](https://user-images.githubusercontent.com/101565106/174285440-97acfc11-de5e-4503-b0fe-9ec90ae7f89a.png)
+<br />
+<br />
 
 For a better view of the result,  **maplist(portray_clause.Matrix)** can be used instead of **write**:
 
 ##### sudoku(Matrix),maplist(labeling([ff]),Matrix),maplist(portray_clause, Matrix).
 
 The final result in SWI-Prolog will be shown like this: 
+<br />
+<br />
 ![image](https://user-images.githubusercontent.com/101565106/173626024-f6bbc180-1622-4262-874d-4a5136cb3dd6.png)
 
 
