@@ -32,25 +32,24 @@ This line is labeling each row in the matrix with a specific name. This is neede
 ##### blocks(L4,L5,L6),
 ##### blocks(L7,L8,L9),
 
-This is a new function called **blocks**. This function will be explained in the following lines:
+This is a new function called **blocks**, which is used three times with 3 different inputs. This function will be explained in the following lines:
 
 ##### blocks([], [], []).
-This line just defined the empty solution for blocks.
-Mathematical Induction??
+This line defines the empty solution for blocks.
+
 ##### blocks([E1,E2,E3|Tail1],
 ##### 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   [E4,E5,E6|Tail2],
 ##### 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   [E7,E8,E9|Tail3]):-
 ##### 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   all_distinct([E1,E2,E3,E4,E5,E6,E7,E8,E9]),
 ##### 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   blocks(Tail1, Tail2, Tail3).
 
-The first line means that we take the first three elements of our first input (e.g. L1). The rest of L1 is in Tail1. In the second line the same happens for the second input (e.g. L2) and in the third line for the third input (e.g. L3). So our first block would be the first three elements of the first three rows. With "all_distinct" we define that all these elements won't have the same number. The last line "blocks(Tail1, Tail2, Tail3)." means that we will repeat this clause with every tail. So in the second round E1 would be the forth element of L1 and so on. 
+The first line of the code separates the first three elements of the first list (e.g. L1) from the rest of the list. The rest is saved in Tail1. In the second line the same happens for the second input (e.g. L2) and in the third line for the third input (e.g. L3). So the first block is build out of the first three elements of the first three rows. With **"all_distinct"** we define that all these elements have to have distinct numbers. The last line **"blocks(Tail1, Tail2, Tail3)."** means that we will repeat this clause with the tails. So in the second pass E1 would be the forth element of L1, E2 the fifth element of L1, E4 would be the forth element of L2 and so on. This loop is running until there are no values left in the tails. 
 
-In total we have to call the blocks-function three times (first time: L1,L2,L3; second time: L4,L5,L6; third time: L7,L8,L9) so that we get our 9 blocks.
+In total the **blocks**-function have to be used three times (first time: L1,L2,L3; second time: L4,L5,L6; third time: L7,L8,L9) so that all of the nine blocks are defined.
 
+At this point all rules for solving a regular sudoku are defined and with this code every regular sudoku can be solved.
 
-With this code we can solve every normal Sudoku. 
-
-The following code is the specifation for solving killer sudokus. 
+The following code is used for defining the special rules for killer sudoku, so the program can solve all killer sudokus as well. 
 
 __L1 = [E11, E12, E13, E14, E15, E16, E17, E18, E19], <br />
 L2 = [E21, E22, E23, E24, E25, E26, E27, E28, E29], <br />
@@ -62,10 +61,10 @@ L7 = [E71, E72, E73, E74, E75, E76, E77, E78, E79],<br />
 L8 = [E81, E82, E83, E84, E85, E86, E87, E88, E89],<br />
 L9 = [E91, E92, E93, E94, E95, E96, E97, E98, E99],<br />__
 
-With this code we defined each position/element in our Matrix. We have to do it because we have to define the special rules for our killer sudoku.
+With this code every single position/element of the matrix is labeled. This is necessary for defining all the cages in the killer sudoku because the cages are irregular and don't have any specific order.   
 
 #### 5 #= E11 + E12, 
-This is an example for defining a cage in our sudoku. 5 is the sum, which the elements E11 and E12 have to build together. Like this we continued with all cages:
+This is an example for defining a cage in our sudoku. 5 is the sum, which the elements E11 and E12 have to build together. This is a special syntax which can be used because the CLPFD-Library is imported. On this way every single cage-rule can be defined:
  
  __11 #= E13 + E23,<br />
 				  9 #= E14 + E15,<br />
@@ -100,15 +99,23 @@ This is an example for defining a cage in our sudoku. 5 is the sum, which the el
 				  9 #= E96 + E97,<br />
 				  8 #= E98 + E99.__
      
-In SWI-Prolog we can ask for the solution of our sudoku with the following input:
+At this point the code is finished. In SWI-Prolog we can ask for the solution of our sudoku with the following input:
+To get the solution, the code file has to be consulted in SWI-Prolog. After that, the solution for the killer sudoku can be requested by using the following input:
+##### sudoku(Matrix).
 
-##### sudoku(Matrix),write(Matrix).
+In this case Prolog probably won't deliver a concret solution. Instead the result will look similar to this: 
+![image](https://user-images.githubusercontent.com/101565106/174283853-e477d2cd-386f-4d3e-8d92-31d750f2770a.png)
+That happens because the domains of some variables are still infinite. For getting a concret solution, the **labeling**-function can be used.  **Labeling** assigns a value to each variable in *Vars*. For more informations about labeling, here is a link: https://www.swi-prolog.org/pldoc/man?predicate=labeling%2f2 
 
-In this case we don't get a concret result. If we want to get concret numbers, we have to add a labeling:
+For the killer sudoku, for example **First-Fail-Labeling** can be used as a labeling strategy. This means that the leftmost variable with smallest domain will be labeled next. Also a **write(Matrix)** can be added, so that Prolog will show all results without shorting them:
 
-#### sudoku(Matrix),maplist(labeling([ff]),Matrix),write(Matrix).
+#### sudoku(Matrix),maplist(labeling([ff]),Matrix), write(Matrix).
 
-If we want a better view of the result, we also can add: **maplist(portray_clause.Matrix)**
+The result will look like the following picture: 
+
+![image](https://user-images.githubusercontent.com/101565106/174285440-97acfc11-de5e-4503-b0fe-9ec90ae7f89a.png)
+
+For a better view of the result,  **maplist(portray_clause.Matrix)** can be used instead of **write**:
 
 ##### sudoku(Matrix),maplist(labeling([ff]),Matrix),maplist(portray_clause, Matrix).
 
