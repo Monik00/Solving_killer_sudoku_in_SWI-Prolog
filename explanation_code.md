@@ -1,6 +1,6 @@
 # Explanation File for Killer Sudoku 
 
-In this file we will explain how our code is working.
+This file will explain how the code and the functions which are used in the code are working. 
 
 
 #### :- use_module(library(clpfd)). 
