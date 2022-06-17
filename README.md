@@ -1,7 +1,7 @@
 # Solving_killer_sudoku_in_SWI-Prolog
 Example of solving killer sudoku in SWI-Prolog
 
-Our final task in the end of a subject Knowlege representation was to create a programme in SWI-Prolog and we choose to solve an example of killer sudoku.
+Our final task in the end of the subject Knowlege representation was to create a program in SWI-Prolog and we choose to solve an example of killer sudoku.
 
 https://en.wikipedia.org/wiki/Killer_sudoku
 "Killer sudoku (also killer su doku, sumdoku, sum doku, sumoku, addoku, or samunamupure) is a puzzle that combines elements of sudoku and kakuro.
