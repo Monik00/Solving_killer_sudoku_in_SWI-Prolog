@@ -116,13 +116,11 @@ For the killer sudoku, for example **First-Fail-Labeling** can be used as a labe
 #### sudoku(Matrix),maplist(labeling([ff]),Matrix), write(Matrix).
 
 The result will look like the following picture: 
-
 <br />
 <br />
 ![image](https://user-images.githubusercontent.com/101565106/174286847-e7f1b0aa-8263-4059-b154-0177ff00adfd.png)
 <br />
 <br />
-
 For a better view of the result,  **maplist(portray_clause.Matrix)** can be used instead of **write**:
 
 ##### sudoku(Matrix),maplist(labeling([ff]),Matrix),maplist(portray_clause, Matrix).
