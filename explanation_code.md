@@ -119,7 +119,7 @@ The result will look like the following picture:
 
 <br />
 <br />
-![image](https://user-images.githubusercontent.com/101565106/174285440-97acfc11-de5e-4503-b0fe-9ec90ae7f89a.png)
+![image](https://user-images.githubusercontent.com/101565106/174286847-e7f1b0aa-8263-4059-b154-0177ff00adfd.png)
 <br />
 <br />
 
